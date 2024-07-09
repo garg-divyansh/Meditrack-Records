@@ -1,15 +1,15 @@
 ######################################################################################################################
 #
-# Project Name - MediTrack Records
-# School - The Heritage School, Kolkata
-# Team - Innovators
-# Participants - Divyansh Garg and Devansh Jain
+# Project Title: MediTrack Records
+# Name: Divyansh Garg
+# GitHub Username: garg-divyansh
+# edX Username: d3v_
+# Location: Kolkata, India
 #
 ########################################################################################################################
 
-
 import csv
-import random
+import random, sys
 from datetime import date
 
 filename = 'PatientRecords.csv'
@@ -19,7 +19,7 @@ def writefile(fname, patient_name, patient_id, patient_dob, appointmentid, appoi
               symptoms,
               disease):
     with open(fname, 'a') as csvfile:
-        csvwriter = csv.writer(csvfile)
+        csvwriter = csv.writer(csvfile, delimiter=',')
         csvwriter.writerows([[patient_id, patient_name, patient_dob, appointmentid, appointment_time, appointment_date,
                               symptoms, disease]])
 
@@ -35,8 +35,7 @@ def appointments():
     global available_appointment_times
 
     if len(available_appointment_times) == 0:
-        print("No Available Appointments for the Day. Try Again Tomorrow!!")
-        return
+        sys.exit("No Available Appointments for the Day. Try Again Tomorrow!!")
 
     print("Available Appointment Times - ")
     for time in available_appointment_times:
@@ -46,21 +45,20 @@ def appointments():
     while find == 0:
         booking_time = input("When would you like to schedule your Doctor's appointment - ")
 
-        for time in available_appointment_times:
-            if time == booking_time.upper():
-                pid = generate_patient_id()
-                global appointment_id
-                appointment_id += 1
-                print(f"""
+        if booking_time.upper() in available_appointment_times:
+            pid = generate_patient_id()
+            global appointment_id
+            appointment_id += 1
+            print(f"""
 
 Congratulations!!!
 Your Booking for {booking_time} is Successful!!
 Patient ID - {pid}
 Appointment ID - {appointment_id}
-                            """)
-                available_appointment_times.remove(booking_time.upper())
+                        """)
+            available_appointment_times.remove(booking_time.upper())
 
-                return pid, appointment_id, booking_time.upper(), date.today().strftime("%d/%m/%Y")
+            return pid, appointment_id, booking_time.upper(), date.today().strftime("%d/%m/%Y")
 
         print("Time Slot already taken...")
 
@@ -173,4 +171,5 @@ Enter your choice - """, end="")
                 print("Wrong Input. Try Again")
 
 
-main()
+if __name__ == "__main__":
+    main()
