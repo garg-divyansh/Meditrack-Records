@@ -1,0 +1,4 @@
+Patient ID,Patient Name,Patient DOB,Appointment ID,Appointment Time,Appointment Date,Symptoms,Diagnosis
+769153,Rita Agarwal,12/12/02,100000,4.00PM,01/05/24,"Sneezing, Coughing",Common Cold
+156671,Rohan Roy,01/02/04,100001,2.30PM,01/05/24,"Body Ache, High Fever",Viral Infection
+727831,Samuel Johnson,02/03/95,100000,4.00PM,01/05/24,"Chest Pain, Fever",COVID-19
